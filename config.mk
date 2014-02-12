@@ -2,11 +2,11 @@
 VERSION = 4.5-tip
 
 # paths
-PREFIX = /usr/local
+PREFIX = /home/$(USER)
 MANPREFIX = ${PREFIX}/share/man
 
-X11INC = /usr/X11R6/include
-X11LIB = /usr/X11R6/lib
+X11INC = /usr/include/X11
+X11LIB = /usr/lib/X11
 
 # Xinerama, comment if you don't want it
 XINERAMALIBS  = -lXinerama
