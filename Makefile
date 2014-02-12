@@ -18,7 +18,7 @@ options:
 	@echo CC -c $<
 	@${CC} -c $< ${CFLAGS}
 
-config.h:
+config.h: config.def.h
 	@echo creating $@ from config.def.h
 	@cp config.def.h $@
 
@@ -34,7 +34,7 @@ stest: stest.o
 
 clean:
 	@echo cleaning
-	@rm -f dmenu stest ${OBJ} dmenu-${VERSION}.tar.gz
+	@rm -f dmenu stest ${OBJ} dmenu-${VERSION}.tar.gz config.h
 
 dist: clean
 	@echo creating dist tarball
