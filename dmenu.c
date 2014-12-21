@@ -69,7 +69,7 @@ main(int argc, char *argv[]) {
 	for(i = 1; i < argc; i++)
 		/* these options take no arguments */
 		if(!strcmp(argv[i], "-v")) {      /* prints version information */
-			puts("dmenu-"VERSION", © 2006-2012 dmenu engineers, see LICENSE for details");
+			puts("dmenu-"VERSION", © 2006-2014 dmenu engineers, see LICENSE for details");
 			exit(EXIT_SUCCESS);
 		}
 		else if(!strcmp(argv[i], "-b"))   /* appears at the bottom of the screen */
@@ -256,9 +256,9 @@ keypress(XKeyEvent *ev) {
 		case XK_h: ksym = XK_BackSpace; break;
 		case XK_i: ksym = XK_Tab;       break;
 		case XK_j: /* fallthrough */
-		case XK_J: ksym = XK_Return;    break;
+		case XK_J: /* fallthrough */
 		case XK_m: /* fallthrough */
-		case XK_M: ksym = XK_Return;    break;
+		case XK_M: ksym = XK_Return; ev->state &= ~ControlMask; break;
 		case XK_n: ksym = XK_Down;      break;
 		case XK_p: ksym = XK_Up;        break;
 
@@ -370,7 +370,8 @@ keypress(XKeyEvent *ev) {
 		puts((sel && !(ev->state & ShiftMask)) ? sel->text : text);
 		if(!(ev->state & ControlMask))
 			exit(EXIT_SUCCESS);
-		sel->out = True;
+		if(sel)
+			sel->out = True;
 		break;
 	case XK_Right:
 		if(text[cursor] != '\0') {
